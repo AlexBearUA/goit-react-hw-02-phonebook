@@ -2,60 +2,39 @@ import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
 
-const INITIAL_STATE = {
-  name: '',
-  number: '',
-};
-
 class ContactForm extends Component {
-  state = {
-    ...INITIAL_STATE,
-  };
-
   nameInputId = nanoid();
   numberInputId = nanoid();
 
-  // handleInputsChange = e => {
-  //   const { name, value } = e.currentTarget;
-
-  //   this.setState({ [name]: value });
-  // };
-
   handleSubmit = e => {
     e.preventDefault();
-    console.log(e.target.elements.name.value);
-    this.setState({ name: e.target.elements.name.value });
-    console.log(this.state);
-    this.props.onSubmit(this.state);
-    this.reset();
-  };
-
-  reset = () => {
-    this.setState({ ...INITIAL_STATE });
+    const contactData = {
+      name: e.target.elements.name.value,
+      number: e.target.elements.number.value,
+    };
+    this.props.onSubmit(contactData);
+    e.target.reset();
   };
 
   render() {
+    const { handleSubmit, nameInputId, numberInputId } = this;
     return (
-      <form onSubmit={this.handleSubmit} className={css.contactForm}>
-        <label htmlFor={this.nameInputId}>Name</label>
+      <form onSubmit={handleSubmit} className={css.contactForm}>
+        <label htmlFor={nameInputId}>Name</label>
 
         <input
-          // onChange={this.handleInputsChange}
-          id={this.nameInputId}
+          id={nameInputId}
           type="text"
           name="name"
-          // value={this.state.name}
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
         />
-        <label htmlFor={this.numberInputId}>Number</label>
+        <label htmlFor={numberInputId}>Number</label>
         <input
-          // onChange={this.handleInputsChange}
-          id={this.numberInputId}
+          id={numberInputId}
           type="tel"
           name="number"
-          // value={this.state.number}
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required

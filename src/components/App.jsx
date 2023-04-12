@@ -16,18 +16,18 @@ class App extends Component {
     filter: '',
   };
 
-  addContact = userData => {
+  addContact = contactData => {
     const { contacts } = this.state;
     const isInContacts = contacts.find(
-      contact => contact.name.toLowerCase() === userData.name.toLowerCase()
+      contact => contact.name.toLowerCase() === contactData.name.toLowerCase()
     );
 
     if (isInContacts) {
-      alert(`${userData.name} is already in contacts`);
+      alert(`${contactData.name} is already in contacts`);
       return;
     }
 
-    const contact = { ...userData, id: nanoid() };
+    const contact = { ...contactData, id: nanoid() };
     this.setState(({ contacts }) => ({
       contacts: [contact, ...contacts],
     }));
