@@ -9,7 +9,7 @@
 
 /* ============================================= */
 
-.ContactListItem {
+/* .ContactListItem {
   display: flex;
   justify-content: space-between;
 }
@@ -20,4 +20,4 @@
 }
 .ContactListItem button:hover {
   background-color: antiquewhite;
-}
+} */
